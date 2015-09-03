@@ -42,6 +42,7 @@ RSpec.describe Inflorm do
       attribute :email, String
       attribute :children, Array[child_class]
       attribute :pet, pet_class
+      attribute :id, String
 
       validates :email,    presence: true
       validates :children, associated: true
@@ -104,6 +105,9 @@ RSpec.describe Inflorm do
 
       p = parent.new id: "anything"
       expect(p).to be_persisted
+
+      c = child.new
+      expect(c).to_not be_persisted
     end
   end
 
@@ -179,10 +183,9 @@ RSpec.describe Inflorm do
         email: nil,
         name: 'blah',
         children: [
-          {id: nil, name: 'a', _destroy: false}
+          {name: 'a', _destroy: false}
         ],
         pet: {
-          id: nil,
           name: "skippy",
           species: "dog"
         }

@@ -11,8 +11,6 @@ module Inflorm
       include Virtus.model
       include ActiveModel::Validations
 
-      attribute :id, String
-
       # Need to override Virtus.model to_h, but self.included is run *after* our module
       # is included, so we can't define this method below with the others (unless we prepended)
       # Note we're unfortunately relying on rails monkey patching
@@ -26,7 +24,7 @@ module Inflorm
   end
 
   def persisted?
-    id.present?
+    respond_to?(:id) && id.present?
   end
 
   def marked_for_destruction?
