@@ -77,16 +77,16 @@ Using those classes like so:
 
 ```ruby
   # Simple object
-  p = Parent.new name: ''
+  p = ParentForm.new name: ''
   p.valid? # => false
 
   # Object with has_one association
-  p = Parent.new name: 'x', child: {age: 123}
+  p = ParentForm.new name: 'x', child: {age: 123}
   p.child.class # => ChildForm
   p.valid? # => true
 
   # Object with has_many association
-  p = Parent.new pets: [{species: 'dog', name: 'George'}, {species: 'cat', name: 'Fluffy'}]
+  p = ParentForm.new pets: [{species: 'dog', name: 'George'}, {species: 'cat', name: 'Fluffy'}]
   p.pets.class # => Array
   p.pets[0].class # => PetForm
   p.valid? # => true
